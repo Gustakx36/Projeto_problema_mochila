@@ -159,7 +159,7 @@ const montarResultadoFinal = () => {
         `;
     };
 
-    $('#tbody_tabela_individuos_inicial, #tbody_tabela_individuos_crossover, #tbody_tabela_individuos_mutacao').html('');
+    $('#tbody_tabela_individuos_inicial, #tbody_tabela_individuos_crossover, #tbody_tabela_individuos_mutacao, #tbody_tabela_individuos_final').html('');
 
     Object.values(individuos.individuos).forEach((e) => {
         var id      = e.individuo_id;
