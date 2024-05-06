@@ -347,7 +347,7 @@ const selecaoParaCrossover = () => {
     };
 
     const geneEscolhaMelhor = genePorProbabilidade(individuosMelhorPior.melhor, somaMelhor, aleatorioPaiMelhor);
-    const geneEscolhaPior   = genePorProbabilidade(individuosMelhorPior.pior, somaMelhor, aleatorioPaiPior);
+    const geneEscolhaPior   = genePorProbabilidade(individuosMelhorPior.pior, somaPior, aleatorioPaiPior);
 
     individuosMelhorPior.crossOver = [individuosMelhorPior.ordemMelhor[geneEscolhaMelhor], individuosMelhorPior.ordemPior[geneEscolhaPior]];
 
@@ -400,7 +400,9 @@ const mutacao = () => {
     const geneMutacao           = itemPorProbabilidade(3, aleatorioGeneMutara, 1);
 
     const quantidadeLimiteGene  = parseNumberInt($(`#qtd${geneMutacao}`).val());
-    const numeroNovoGene        = itemPorProbabilidade(quantidadeLimiteGene, aleatorionumeroGene, 0);
+    const numeroNovoGene        = itemPorProbabilidade(quantidadeLimiteGene + 1, aleatorionumeroGene, 0);
+
+    console.log(quantidadeLimiteGene, aleatorionumeroGene, 0);
 
     const numeroAntigoGene       = $(`#individuo${individuos.crossOver[individuoMutacao - 1]}item${geneMutacao}`).val();
 
