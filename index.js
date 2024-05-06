@@ -210,32 +210,31 @@ const montarResultadoFinal = () => {
         $('#mutacao').addClass('hidden');
     }else{
         $('#mutacao').removeClass('hidden');
+        Object.values(individuos.individuosNovosMutacao).forEach((e) => {
+            var id          = e.individuo_id;
+            var itens       = e.genes;
+            var peso        = e.peso;
+            var valor       = e.valor;
+            var classe      = '';
+            var pesoCor     = '';
+            var valorCor    = '';
+    
+            if(individuos.mutacaoVisualResult.id == id){
+                individuos.individuosNovosMutacao[id].genes[individuos.mutacaoVisualResult.gene - 1] = individuos.mutacaoVisualResult.res;
+                itens       = individuos.individuosNovosMutacao[id].genes
+                classe      = 'red';
+                pesoCor     = 'red';
+                valorCor    = 'red';
+                peso        = `${individuos.individuosNovosCrossover[id].peso} -> ${peso}`;
+                valor       = `${individuos.individuosNovosCrossover[id].valor} -> ${valor}`;
+            }
+    
+            $('#tbody_tabela_individuos_mutacao').append(templateLinha(id, itens, peso, valor));
+            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}item${individuos.mutacaoVisualResult.gene}`).addClass(classe);
+            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemPeso`).addClass(pesoCor);
+            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemValor`).addClass(valorCor);
+        });
     }
-
-    Object.values(individuos.individuosNovosMutacao).forEach((e) => {
-        var id          = e.individuo_id;
-        var itens       = e.genes;
-        var peso        = e.peso;
-        var valor       = e.valor;
-        var classe      = '';
-        var pesoCor     = '';
-        var valorCor    = '';
-
-        if(individuos.mutacaoVisualResult.id == id){
-            individuos.individuosNovosMutacao[id].genes[individuos.mutacaoVisualResult.gene - 1] = individuos.mutacaoVisualResult.res;
-            itens       = individuos.individuosNovosMutacao[id].genes
-            classe      = 'red';
-            pesoCor     = 'red';
-            valorCor    = 'red';
-            peso        = `${individuos.individuosNovosCrossover[id].peso} -> ${peso}`;
-            valor       = `${individuos.individuosNovosCrossover[id].valor} -> ${valor}`;
-        }
-
-        $('#tbody_tabela_individuos_mutacao').append(templateLinha(id, itens, peso, valor));
-        $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}item${individuos.mutacaoVisualResult.gene}`).addClass(classe);
-        $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemPeso`).addClass(pesoCor);
-        $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemValor`).addClass(valorCor);
-    });
 
     Object.values(individuosFinais).forEach((e) => {
         var id              = e.individuo_id;
@@ -393,6 +392,7 @@ const crossOver = () => {
 
 const mutacao = () => {
     const individuos            = crossOver();
+    individuos.individuosNovosMutacao = calculoPesoValorIndividuos();
     if(parseNumberFloat($('#aleatorio_mutara').val(), true) > parseNumberFloat($('#mutacao_taxa').val(), true)) return individuos;
     const aleatorioQuemMutara   = parseNumberFloat($('#aleatorio_quem_mutara').val(), true);
     const aleatorioGeneMutara   = parseNumberFloat($('#aleatorio_gene_mutara').val(), true);
