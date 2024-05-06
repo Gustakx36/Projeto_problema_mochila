@@ -196,8 +196,8 @@ const montarResultadoFinal = () => {
             classe      = 'red';
             pesoCor     = 'red';
             valorCor    = 'red';
-            peso        = `${individuos.individuos[id].peso} 🠮 ${peso}`;
-            valor       = `${individuos.individuos[id].valor} 🠮 ${valor}`;
+            peso        = `${individuos.individuos[id].peso} -> ${peso}`;
+            valor       = `${individuos.individuos[id].valor} -> ${valor}`;
         }
 
         $('#tbody_tabela_individuos_crossover').append(templateLinha(id, itens, peso, valor));
@@ -227,8 +227,8 @@ const montarResultadoFinal = () => {
             classe      = 'red';
             pesoCor     = 'red';
             valorCor    = 'red';
-            peso        = `${individuos.individuosNovosCrossover[id].peso} 🠮 ${peso}`;
-            valor       = `${individuos.individuosNovosCrossover[id].valor} 🠮 ${valor}`;
+            peso        = `${individuos.individuosNovosCrossover[id].peso} -> ${peso}`;
+            valor       = `${individuos.individuosNovosCrossover[id].valor} -> ${valor}`;
         }
 
         $('#tbody_tabela_individuos_mutacao').append(templateLinha(id, itens, peso, valor));
@@ -251,7 +251,7 @@ const montarResultadoFinal = () => {
 
         for(i = 0; i < itensIniciais.length; i++) {
             if(itensIniciais[i] != itens[i]) {
-                itens[i] = `${itensIniciais[i]} 🠮 ${itens[i]}`;
+                itens[i] = `${itensIniciais[i]} -> ${itens[i]}`;
                 itensRedCor.push(`#tbody_tabela_individuos_final > tr > td> #individuo${id}item${i + 1}`)
                 alteracao   = true;
             }
@@ -261,8 +261,8 @@ const montarResultadoFinal = () => {
             classe      = 'red';
             pesoCor     = 'red';
             valorCor    = 'red';
-            peso        = `${individuos.individuos[id].peso} 🠮 ${peso}`;
-            valor       = `${individuos.individuos[id].valor} 🠮 ${valor}`;
+            peso        = `${individuos.individuos[id].peso} -> ${peso}`;
+            valor       = `${individuos.individuos[id].valor} -> ${valor}`;
         }
 
         $('#tbody_tabela_individuos_final').append(templateLinha(id, itens, peso, valor));
@@ -370,12 +370,12 @@ const crossOver = () => {
     selecaoCrossover.crossOverVisualResultMelhor = {
         id      : selecaoCrossover.crossOver[0], 
         gene    : geneCrossover,
-        res     : `${valorItemMelhor} 🠮 ${valorItemPior}`
+        res     : `${valorItemMelhor} -> ${valorItemPior}`
     }
     selecaoCrossover.crossOverVisualResultPior = {
         id      : selecaoCrossover.crossOver[1], 
         gene    : geneCrossover,
-        res     : `${valorItemPior} 🠮 ${valorItemMelhor}`
+        res     : `${valorItemPior} -> ${valorItemMelhor}`
     }
 
     selecaoCrossover.executeFinal = [];
@@ -411,7 +411,7 @@ const mutacao = () => {
     individuos.mutacaoVisualResult = {
         id      : individuos.crossOver[individuoMutacao - 1],
         gene    : geneMutacao,
-        res     : `${numeroAntigoGene} 🠮 ${numeroNovoGene}`
+        res     : `${numeroAntigoGene} -> ${numeroNovoGene}`
     }
 
     individuos.executeFinal.push({
