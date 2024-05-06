@@ -393,6 +393,7 @@ const crossOver = () => {
 
 const mutacao = () => {
     const individuos            = crossOver();
+    if(parseNumberFloat($('#aleatorio_mutara').val(), true) > parseNumberFloat($('#mutacao_taxa').val(), true)) return individuos;
     const aleatorioQuemMutara   = parseNumberFloat($('#aleatorio_quem_mutara').val(), true);
     const aleatorioGeneMutara   = parseNumberFloat($('#aleatorio_gene_mutara').val(), true);
     const aleatorionumeroGene   = parseNumberFloat($('#aleatorio_numero_gene').val(), true);
