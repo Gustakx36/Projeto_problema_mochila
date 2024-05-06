@@ -1,0 +1,54 @@
+.tabela th, .tabela td {
+    padding: 5px;
+    text-align: center;
+    border: solid 2px;
+    border-color: rgb(71 85 105);
+}
+
+.red {
+    background-color: rgba(195, 42, 42, 0.619) !important;
+}
+
+.tabela td > input {
+    width: 100%;
+    border-color: currentColor;
+    text-align: center;
+}
+
+.tabela td > input {
+    background-color: rgb(55 65 81);
+    color: white;
+}
+
+.tabela td > input:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline-style: dashed;
+    outline-width: 2px;
+    outline-color: rgb(15 23 42);
+}
+
+.modalResultado{
+    background-color: rgb(0, 0, 0, 0.6);
+}
+
+.input-var:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline-style: dashed;
+    outline-width: 2px;
+    outline-color: rgb(5, 76, 241);
+}
+
+.input-var {
+    background-color: rgb(55 65 81);
+    color: white;
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input {
+    -moz-appearance: textfield;
+}
