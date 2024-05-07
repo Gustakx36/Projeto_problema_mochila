@@ -122,7 +122,7 @@ const definirNumeroIndividuos = () => {
     const templateLinha = (id) => {
         return `
             <tr>
-                <td>${id}</td>
+                <td>Ind. ${id}</td>
                 <td class="bg-gray-700"><input type="number" id="individuo${id}item1"></td>
                 <td class="bg-gray-700"><input type="number" id="individuo${id}item2"></td>
                 <td class="bg-gray-700"><input type="number" id="individuo${id}item3"></td>
@@ -305,7 +305,7 @@ const selecaoPaiMelhorPior = () => {
     const ordemPior     = [];
 
     for(i = 1; i < qtdIndividuo + 1; i++){
-        listaPesos[i] = Math.abs(pesoLimite - pesoValorIndividuo[i].peso);
+        listaPesos[i] = Math.abs(parseNumberInt($('#qtd' + i)) - pesoValorIndividuo[i].valor);
     };
 
     const itemMelhorPior = Object.keys(listaPesos).sort(function(a,b){return listaPesos[a]-listaPesos[b]});
