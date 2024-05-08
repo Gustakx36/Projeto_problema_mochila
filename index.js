@@ -28,6 +28,7 @@ $('.modalResultado, .modalFilho').on('click', (e) => {
     if(e.target.id == 'modal'){
         $('.modalResultado').addClass('hidden');
         $('body').removeClass('overflow-y-hidden');
+        $('#tbody_tabela_individuos_inicial, #tbody_tabela_individuos_crossover, #tbody_tabela_individuos_mutacao, #tbody_tabela_individuos_final').html('');
     }
 });
 $('#calcular').on('click', () => {
@@ -402,8 +403,6 @@ const mutacao = () => {
 
     const quantidadeLimiteGene  = parseNumberInt($(`#qtd${geneMutacao}`).val());
     const numeroNovoGene        = itemPorProbabilidade(quantidadeLimiteGene + 1, aleatorionumeroGene, 0);
-
-    console.log(quantidadeLimiteGene, aleatorionumeroGene, 0);
 
     const numeroAntigoGene       = $(`#individuo${individuos.crossOver[individuoMutacao - 1]}item${geneMutacao}`).val();
 
