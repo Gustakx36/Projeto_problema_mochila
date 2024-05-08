@@ -147,15 +147,15 @@ const montarResultadoFinal = () => {
         individuos.executeFinal[i].item.val(individuos.executeFinal[i].execucao);
     }
 
-    const templateLinha = (id, itens, peso, valor) => {
+    const templateLinha = (id, itens, peso, valor, tipo) => {
         return `
             <tr>
                 <td>${id}</td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}item1" value="${itens[0]}" class="text-[11.5px] sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}item2" value="${itens[1]}" class="text-[11.5px] sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}item3" value="${itens[2]}" class="text-[11.5px] sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}itemPeso" value="${peso}" class="text-[11.5px] sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}itemValor" value="${valor}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}item1${tipo}" value="${itens[0]}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}item2${tipo}" value="${itens[1]}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}item3${tipo}" value="${itens[2]}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}itemPeso${tipo}" value="${peso}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}itemValor${tipo}" value="${valor}" class="text-[11.5px] sm:text-base" disabled></td>
             </tr>
         `;
     };
@@ -167,8 +167,9 @@ const montarResultadoFinal = () => {
         var itens   = e.genes;
         var peso    = e.peso;
         var valor   = e.valor;
+        var tipo    = 'inicial';
 
-        return $('#tbody_tabela_individuos_inicial').append(templateLinha(id, itens, peso, valor));
+        return $('#tbody_tabela_individuos_inicial').append(templateLinha(id, itens, peso, valor, tipo));
     });
 
     Object.values(individuos.individuosNovosCrossover).forEach((e) => {
@@ -180,6 +181,7 @@ const montarResultadoFinal = () => {
         var pesoCor     = '';
         var valorCor    = '';
         var alteracao   = false;
+        var tipo        = 'crossover';
 
         if(individuos.crossOverVisualResultMelhor.id == id){
             individuos.individuosNovosCrossover[id].genes[individuos.crossOverVisualResultMelhor.gene - 1] = individuos.crossOverVisualResultMelhor.res;
@@ -201,10 +203,10 @@ const montarResultadoFinal = () => {
             valor       = `${individuos.individuos[id].valor} -> ${valor}`;
         }
 
-        $('#tbody_tabela_individuos_crossover').append(templateLinha(id, itens, peso, valor));
-        $(`#tbody_tabela_individuos_crossover > tr > td> #individuo${id}item${individuos.crossOverVisualResultPior.gene}`).addClass(classe);
-        $(`#tbody_tabela_individuos_crossover > tr > td> #individuo${id}itemPeso`).addClass(pesoCor);
-        $(`#tbody_tabela_individuos_crossover > tr > td> #individuo${id}itemValor`).addClass(valorCor);
+        $('#tbody_tabela_individuos_crossover').append(templateLinha(id, itens, peso, valor, tipo));
+        $(`#tbody_tabela_individuos_crossover > tr > td> #individuo${id}item${individuos.crossOverVisualResultPior.gene}${tipo}`).addClass(classe);
+        $(`#tbody_tabela_individuos_crossover > tr > td> #individuo${id}itemPeso${tipo}`).addClass(pesoCor);
+        $(`#tbody_tabela_individuos_crossover > tr > td> #individuo${id}itemValor${tipo}`).addClass(valorCor);
     });
 
     if(parseNumberFloat($('#aleatorio_mutara').val(), true) > parseNumberFloat($('#mutacao_taxa').val(), true)){
@@ -219,6 +221,7 @@ const montarResultadoFinal = () => {
             var classe      = '';
             var pesoCor     = '';
             var valorCor    = '';
+            var tipo        = 'mutacao';
     
             if(individuos.mutacaoVisualResult.id == id){
                 individuos.individuosNovosMutacao[id].genes[individuos.mutacaoVisualResult.gene - 1] = individuos.mutacaoVisualResult.res;
@@ -230,10 +233,10 @@ const montarResultadoFinal = () => {
                 valor       = `${individuos.individuosNovosCrossover[id].valor} -> ${valor}`;
             }
     
-            $('#tbody_tabela_individuos_mutacao').append(templateLinha(id, itens, peso, valor));
-            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}item${individuos.mutacaoVisualResult.gene}`).addClass(classe);
-            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemPeso`).addClass(pesoCor);
-            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemValor`).addClass(valorCor);
+            $('#tbody_tabela_individuos_mutacao').append(templateLinha(id, itens, peso, valor, tipo));
+            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}item${individuos.mutacaoVisualResult.gene}${tipo}`).addClass(classe);
+            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemPeso${tipo}`).addClass(pesoCor);
+            $(`#tbody_tabela_individuos_mutacao > tr > td> #individuo${id}itemValor${tipo}`).addClass(valorCor);
         });
     }
 
@@ -248,11 +251,12 @@ const montarResultadoFinal = () => {
         var classe          = '';
         var pesoCor         = '';
         var valorCor        = '';
+        var tipo            = 'final';
 
         for(i = 0; i < itensIniciais.length; i++) {
             if(itensIniciais[i] != itens[i]) {
                 itens[i] = `${itensIniciais[i]} -> ${itens[i]}`;
-                itensRedCor.push(`#tbody_tabela_individuos_final > tr > td> #individuo${id}item${i + 1}`)
+                itensRedCor.push(`#tbody_tabela_individuos_final > tr > td> #individuo${id}item${i + 1}${tipo}`)
                 alteracao   = true;
             }
         }
@@ -265,10 +269,10 @@ const montarResultadoFinal = () => {
             valor       = `${individuos.individuos[id].valor} -> ${valor}`;
         }
 
-        $('#tbody_tabela_individuos_final').append(templateLinha(id, itens, peso, valor));
+        $('#tbody_tabela_individuos_final').append(templateLinha(id, itens, peso, valor, tipo));
         $(`${itensRedCor.length == 0 ? '1': itensRedCor.join(',')}`).addClass(classe);
-        $(`#tbody_tabela_individuos_final > tr > td> #individuo${id}itemPeso`).addClass(pesoCor);
-        $(`#tbody_tabela_individuos_final > tr > td> #individuo${id}itemValor`).addClass(valorCor);
+        $(`#tbody_tabela_individuos_final > tr > td> #individuo${id}itemPeso${tipo}`).addClass(pesoCor);
+        $(`#tbody_tabela_individuos_final > tr > td> #individuo${id}itemValor${tipo}`).addClass(valorCor);
     });
 };
 
