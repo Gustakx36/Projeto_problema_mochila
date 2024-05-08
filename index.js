@@ -122,7 +122,7 @@ const definirNumeroIndividuos = () => {
     const templateLinha = (id) => {
         return `
             <tr>
-                <td>Ind. ${id}</td>
+                <td>${id}</td>
                 <td class="bg-gray-700"><input type="number" id="individuo${id}item1"></td>
                 <td class="bg-gray-700"><input type="number" id="individuo${id}item2"></td>
                 <td class="bg-gray-700"><input type="number" id="individuo${id}item3"></td>
@@ -150,11 +150,11 @@ const montarResultadoFinal = () => {
         return `
             <tr>
                 <td>${id}</td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}item1" value="${itens[0]}" class="text-xs sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}item2" value="${itens[1]}" class="text-xs sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}item3" value="${itens[2]}" class="text-xs sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}itemPeso" value="${peso}" class="text-xs sm:text-base" disabled></td>
-                <td class="bg-gray-700"><input type="text" id="individuo${id}itemValor" value="${valor}" class="text-xs sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}item1" value="${itens[0]}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}item2" value="${itens[1]}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}item3" value="${itens[2]}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}itemPeso" value="${peso}" class="text-[11.5px] sm:text-base" disabled></td>
+                <td class="bg-gray-700"><input type="text" id="individuo${id}itemValor" value="${valor}" class="text-[11.5px] sm:text-base" disabled></td>
             </tr>
         `;
     };
@@ -305,7 +305,7 @@ const selecaoPaiMelhorPior = () => {
     const ordemPior     = [];
 
     for(i = 1; i < qtdIndividuo + 1; i++){
-        listaPesos[i] = Math.abs(parseNumberInt($('#qtd' + i)) - pesoValorIndividuo[i].valor);
+        listaPesos[i] = Math.abs(pesoLimite - pesoValorIndividuo[i].peso);
     };
 
     const itemMelhorPior = Object.keys(listaPesos).sort(function(a,b){return listaPesos[a]-listaPesos[b]});
