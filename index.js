@@ -71,21 +71,21 @@ const genePorProbabilidade = (genes, total, aleatorioEscolha) => {
 };
 
 const itemPorProbabilidade = (qtdItens, aleatorio, itemInicial) => {
-    var num     = aleatorio * qtdItens;
-
-    var valSel      = Math.trunc(num);
-    var isInt       = valSel == num;
-    var isRdmZero   = aleatorio == 0.0;
-
-    var escolhido;
-
-    if (isInt && ! isRdmZero){
-        escolhido = valSel - 1;
-    }else{
-        escolhido = valSel;
-    };
+    if(aleatorio == 0) return itemInicial;
+    var probabilidadeAcumulada = 0;
+    var probabilidadePorItem = 1 / qtdItens;
     
-    return escolhido + itemInicial;
+    for (let i = itemInicial; i <= qtdItens; i++) { 
+        var probabilidadeAcumuladaPosterior = probabilidadeAcumulada + probabilidadePorItem;
+
+        console.log(probabilidadeAcumulada, probabilidadePorItem)
+
+        if (aleatorio > probabilidadeAcumulada && aleatorio <= probabilidadeAcumuladaPosterior) {
+            return i;
+        }
+
+        probabilidadeAcumulada = probabilidadeAcumuladaPosterior;
+    }
 };  
 
 const pesoItem = () => {
