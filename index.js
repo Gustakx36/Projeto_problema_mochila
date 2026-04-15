@@ -313,7 +313,10 @@ const selecaoPaiMelhorPior = () => {
         listaPesos[i] = Math.abs(pesoLimite - pesoValorIndividuo[i].peso);
     };
 
-    const itemMelhorPior = Object.keys(listaPesos).sort(function(a,b){return listaPesos[a]-listaPesos[b]});
+    const itemMelhorPior = Object.keys(listaPesos)
+        .sort(function(a, b) {
+            return listaPesos[b] - listaPesos[a];
+        });
 
     for(i = 0; i < itemMelhorPior.length; i++){
         if(i < media){
